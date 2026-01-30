@@ -1,0 +1,88 @@
+@startuml
+class application.CPTSMachine {
+- {static} ArrayList<Station> stationlist
+- {static} ArrayList<Ticket> ticketlist
+- {static} int totalStationNumber
+- {static} boolean isEnd
+- {static} Scanner kb
++ {static} void main(String[])
++ {static} void initializeData()
++ {static} boolean addStation(String)
++ {static} boolean isStationExisted(String)
++ {static} boolean buyTicket(int,Station,Station)
++ {static} void showAllStation()
++ {static} void handleAddStation()
++ {static} void showAllBoughtTicket()
++ {static} void handleBuyTicket()
++ {static} ArrayList<Station> getStationlist()
++ {static} ArrayList<Ticket> getTicketlist()
++ {static} int getTotalStationNumber()
+}
+
+
+class test.grader.TestCPTSMachine {
+- Station start
+- Station end
+~ void setUp()
+~ void testIsStationExisted()
+~ void testAddStation()
+~ void testBuyTicketIllegal()
+~ void testBuyTicketLegal()
+}
+
+
+class logic.Station {
+- String name
+- int number
++ String getName()
++ void setName(String)
++ int getNumber()
++ void setNumber(int)
+}
+
+
+class test.grader.TestTicket {
+- Ticket t
+- Station start
+- Station end
+~ void setUp()
++ void testSetTypeLegal()
++ void testSetTypeIllegal()
++ void testSetStation()
++ void testCalculatePrice()
++ void testGetDescription()
+}
+
+
+class test.grader.TestStation {
+- Station t
+~ void setUp()
++ void testConstructor()
++ void testSetName()
++ void testSetNumber()
+}
+
+
+class logic.Ticket {
+- int type
+- int priceperstation
+- Station start
+- Station end
++ int getType()
++ int getPricePerStation()
++ Station getStart()
++ Station getEnd()
++ void setType(int)
++ void setStation(Station,Station)
++ double calculatePrice()
++ String getDescription()
++ boolean isStationValid(Station,Station)
++ int getStationDistance(Station,Station)
++ void setEnd(Station)
++ void setStart(Station)
++ int getPriceperstation()
++ void setPriceperstation(int)
+}
+
+
+@enduml

@@ -73,16 +73,29 @@ public class CPTSMachine {
 	}
 	
 	public static boolean addStation(String name) {
-		if(!getStationlist().contains(name)){
-            stationlist.add(new Station(name, getTotalStationNumber()+1));
-            return true;
-        } else {
-            return false;
+		for(Station s : stationlist){
+            if(s.getName().equals(name)){
+                return false;
+            } else {
+                continue;
+            }
         }
+        Station newStation = new Station(name, totalStationNumber);
+        stationlist.add(newStation);
+        totalStationNumber++;
+        return true;
+
 	}
 	
 	public static boolean isStationExisted(String name) {
-        return getStationlist().contains(name);
+        for(Station s : stationlist){
+            if(s.getName().equals(name)){
+                return true;
+            } else {
+                continue;
+            }
+        }
+        return false;
 	}
 	
 	public static boolean buyTicket(int type, Station start, Station end) {
@@ -103,7 +116,14 @@ public class CPTSMachine {
                 return false;
             }
         }
-        System.out.println("Bought "+type+ " Ticket, from "+start+" to "+ end +", for "+ +" Baht!");
+        if(start == end){
+            System.out.println("This ticket cannot be bought.");
+            return false;
+        }
+        Ticket newTicket = new Ticket(type, start, end);
+        double price = newTicket.calculatePrice();
+        System.out.println("Bought "+type+ " Ticket, from "+start.getName()+" to "+ end.getName() +", for "+ price +" Baht!");
+        ticketlist.add(newTicket);
         return true;
 	}
 	

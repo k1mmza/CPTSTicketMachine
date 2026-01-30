@@ -22,6 +22,10 @@ public class Station {
     }
 
     public void setNumber(int number) {
-        this.number = number;
+        if(number < 0){
+            this.number = 0;
+        } else {
+            this.number = number;
+        }
     }
 }
